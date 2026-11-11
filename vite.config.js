@@ -19,7 +19,9 @@ function slimShaderRegistry() {
 }
 
 // WebGPU only exists in secure contexts, so a phone on the LAN needs HTTPS to see the shaders.
+// base './' keeps asset paths relative, so the build works from github.io/MontenegroCV/ and from any other folder.
 export default defineConfig({
+  base: './',
   plugins: [slimShaderRegistry(), basicSsl()],
   optimizeDeps: {
     rolldownOptions: { plugins: [slimShaderRegistry()] },
