@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "vite --host 127.0.0.1 --port 5173",
-    "build": "vite build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "phone": "vite build && vite preview"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +16,8 @@
     "shaders": "^4.0.7",
     "vite": "^8.3.7"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@vitejs/plugin-basic-ssl": "^2.3.0"
+  }
 }
