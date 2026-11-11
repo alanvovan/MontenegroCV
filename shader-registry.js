@@ -1,18 +1,20 @@
 // Stands in for the shaders package registry so the bundle only carries the components the presets in main.js use.
 // Add a component here when a preset starts using it, or createShader will report it as unknown.
-import { componentDefinition as Satin } from 'shaders/core/Satin';
-import { componentDefinition as ZoomBlur } from 'shaders/core/ZoomBlur';
-import { componentDefinition as Swirl } from 'shaders/core/Swirl';
+import { componentDefinition as Group } from 'shaders/core/Group';
+import { componentDefinition as MultiPointGradient } from 'shaders/core/MultiPointGradient';
+import { componentDefinition as WaveDistortion } from 'shaders/core/WaveDistortion';
+import { componentDefinition as DotGrid } from 'shaders/core/DotGrid';
+import { componentDefinition as ChromaFlow } from 'shaders/core/ChromaFlow';
+import { componentDefinition as LinearGradient } from 'shaders/core/LinearGradient';
+import { componentDefinition as CursorRipples } from 'shaders/core/CursorRipples';
 import { componentDefinition as Blob } from 'shaders/core/Blob';
 import { componentDefinition as ChromaticAberration } from 'shaders/core/ChromaticAberration';
 import { componentDefinition as FilmGrain } from 'shaders/core/FilmGrain';
 import { componentDefinition as SolidColor } from 'shaders/core/SolidColor';
-import { componentDefinition as Ripples } from 'shaders/core/Ripples';
-import { componentDefinition as Vignette } from 'shaders/core/Vignette';
-import { componentDefinition as BokehBlur } from 'shaders/core/BokehBlur';
-import { componentDefinition as CursorRipples } from 'shaders/core/CursorRipples';
+import { componentDefinition as WorleyNoise } from 'shaders/core/WorleyNoise';
+import { componentDefinition as LinearBlur } from 'shaders/core/LinearBlur';
 
-const definitions = [Satin, ZoomBlur, Swirl, Blob, ChromaticAberration, FilmGrain, SolidColor, Ripples, Vignette, BokehBlur, CursorRipples];
+const definitions = [Group, MultiPointGradient, WaveDistortion, DotGrid, ChromaFlow, LinearGradient, CursorRipples, Blob, ChromaticAberration, FilmGrain, SolidColor, WorleyNoise, LinearBlur];
 
 const shaderRegistry = Object.fromEntries(definitions.map((def) => [def.name, {
   name: def.name,

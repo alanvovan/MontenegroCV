@@ -9,12 +9,12 @@
   --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
   --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: oklch(94.5% 0.010 76); --color-paper-2: oklch(91.8% 0.013 74); --color-paper-3: oklch(88% 0.015 72);
-  --color-ink: oklch(19% 0.024 52); --color-ink-2: oklch(31% 0.018 54); --color-muted: oklch(47% 0.014 60);
-  --color-rule: oklch(81% 0.011 70);
-  --color-accent: oklch(41% 0.075 248); --color-accent-ink: oklch(96% 0.008 76); --color-focus: oklch(50% 0.095 248);
-  --color-card: oklch(97.6% 0.007 82); --color-card-edge: oklch(86% 0.012 72); --color-pencil: oklch(52% 0.010 62);
-  --card-lit: oklch(98.4% 0.006 84); --card-shade: oklch(96.4% 0.008 78); --lit: oklch(99.6% 0.004 85 / 0.9);
+  --color-paper: oklch(95.2% 0.024 82); --color-paper-2: oklch(93% 0.029 74); --color-paper-3: oklch(90.2% 0.034 66);
+  --color-ink: oklch(22% 0.04 55); --color-ink-2: oklch(32% 0.032 58); --color-muted: oklch(40% 0.032 58);
+  --color-rule: oklch(87% 0.023 70);
+  --color-accent: oklch(41% 0.075 248); --color-accent-ink: oklch(96% 0.02 82); --color-focus: oklch(50% 0.095 248);
+  --color-card: oklch(96.2% 0.02 84); --color-card-edge: oklch(88% 0.02 70); --color-pencil: oklch(46% 0.032 62);
+  --card-lit: oklch(97% 0.017 86); --card-shade: oklch(94% 0.023 76); --lit: oklch(97.8% 0.014 85 / 0.9);
   --stain-1: oklch(70% 0.075 14); --stain-2: oklch(66% 0.055 132); --stain-3: oklch(60% 0.080 58); --stain-4: oklch(68% 0.045 206);
   --font-display: "Sentient", Georgia, serif; --font-body: "Hanken Grotesk", system-ui, sans-serif;
   --font-outlier: var(--font-body);

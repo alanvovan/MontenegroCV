@@ -15,35 +15,58 @@ const weak =
 const canShade = 'gpu' in navigator && !reduced && !weak;
 
 const presets = {
-  // Hero: Neutral Folds 2, slowed down so the name stays readable.
+  // Hero: the cursor trail. At rest, a near-black gradient. The trail reveals the warm field.
   hero: {
     components: [
-      { type: 'Satin', id: 'hero-satin', props: { anisotropy: 0.11, bloom: 0.21, breeze: 0.45, color: '#d9d9d9', fiberAngle: 243, foldCount: 5, foldDepth: 0.48, foldDirection: 83, foldWidth: 0.3, gloss: 0.19, highlightColor: '#ffffff', lightAngle: 255, pinning: 0, sheen: 0.36, speed: 0.55, weave: 0.28 } },
-      { type: 'ZoomBlur', id: 'hero-zoom', props: { dispersion: 1, focus: 0.6, intensity: 42 } },
-    ],
-    options: { toneMapping: 'neutral' },
-  },
-  // Contacts: Light Leaks 4.
-  contact: {
-    components: [
-      { type: 'Swirl', id: 'leak-swirl', props: { blend: 40, colorA: '#0a1628', colorB: '#8b5e3c', colorSpace: 'oklch', detail: 1.8, speed: 0.4 } },
-      { type: 'Blob', id: 'leak-blob-a', props: { center: { x: 0.45, y: 0.28 }, colorA: '#f2b544', colorB: '#e06820', colorSpace: 'oklch', deformation: 1.5, highlightColor: '#ffffff', highlightIntensity: 0.6, opacity: 0.75, size: 0.6, softness: 3, speed: 0.6 } },
-      { type: 'Blob', id: 'leak-blob-b', props: { center: { x: 0.75, y: 0.29 }, colorA: '#ff9040', colorB: '#c44020', colorSpace: 'oklch', deformation: 1.8, highlightColor: '#ffffff', highlightIntensity: 0.7, opacity: 0.65, softness: 3.5, speed: 0.55, visible: true } },
-      { type: 'ChromaticAberration', id: 'leak-ca', props: { angle: 30, blueOffset: 1.5, redOffset: -1.5, strength: 0.55 } },
-      { type: 'FilmGrain', id: 'leak-grain', props: { strength: 0.08 } },
-    ],
-    options: {},
-  },
-  // Project cards on hover: Bokeh Ripples, recoloured to ink and slate, follows the cursor.
-  card: {
-    components: [
-      { type: 'SolidColor', id: 'card-bg', props: { color: '#17110d' } },
-      { type: 'Ripples', id: 'card-rip', props: { colorA: '#9fb3d1', frequency: 53.3, thickness: 0.01 } },
-      { type: 'Vignette', id: 'card-vig', props: { falloff: 0.87, radius: 0.1 } },
-      { type: 'BokehBlur', id: 'card-bokeh', props: { chromaticFringe: 0, highlightGain: 10, highlightThreshold: 0.21, radius: 24 } },
-      { type: 'CursorRipples', id: 'card-cursor' },
+      { type: 'DotGrid', id: 'trailDots', props: { density: 40, dotSize: { type: 'map', source: 'trailFlow', channel: 'alpha', inputMin: 0, inputMax: 1, outputMin: 0, outputMax: 1 }, twinkle: 0.9, visible: false } },
+      { type: 'ChromaFlow', id: 'trailFlow', props: { intensity: 1.4, radius: 2.9, visible: false } },
+      { type: 'LinearGradient', id: 'hero-ground', props: { colorA: '#3a2a22', colorB: '#241812', colorSpace: 'oklch', start: { x: 0, y: 1 }, end: { x: 1, y: 0 } } },
+      { type: 'LinearGradient', id: 'hero-reveal', props: { colorA: '#e66047', colorB: '#e66047', colorSpace: 'oklch', start: { x: 0, y: 1 }, end: { x: 1, y: 0 }, maskSource: 'trailDots' } },
+      { type: 'CursorRipples', id: 'hero-ripples', props: {} },
+      { type: 'FilmGrain', id: 'hero-grain', props: { strength: 0.1 } },
     ],
     options: { toneMapping: 'aces' },
+  },
+  // Contact: the warm field that used to fill the hero, Run palette, always on.
+  contact: {
+    components: [
+      {
+        type: 'Group',
+        id: 'contact-field',
+        children: [
+          {
+            type: 'MultiPointGradient',
+            id: 'contact-gradient',
+            props: {
+              colorA: '#e66047',
+              colorB: '#2b0912',
+              colorC: '#2e0d04',
+              colorD: '#4a3a38',
+              colorE: '#2b1512',
+              positionA: { x: 0, y: 0 },
+              positionB: { x: 0.71, y: 0.06 },
+              positionC: { x: 0.26, y: 0.73 },
+              positionD: { x: 1, y: 1 },
+            },
+          },
+          { type: 'WaveDistortion', id: 'contact-wave', props: { angle: 21, speed: 2, strength: 0.4, visible: true } },
+        ],
+      },
+      { type: 'FilmGrain', id: 'contact-grain', props: { strength: 0.1, visible: true } },
+    ],
+    options: { toneMapping: 'aces' },
+  },
+  // Project cards on hover: Afternoon Sunlight 3, recoloured to the warm paper palette, with the contact block's grain.
+  card: {
+    components: [
+      { type: 'Blob', id: 'card-mask', props: { center: { x: 0.53, y: 0.97 }, colorA: '#000000', colorB: '#000000', size: 0.9, softness: 1.5, speed: 0.8, visible: false } },
+      { type: 'SolidColor', id: 'card-bg', props: { color: '#e6ddd1' } },
+      { type: 'WorleyNoise', id: 'card-light', props: { colorA: '#b9a998', colorB: '#fcf7ef', contrast: 0.55, lacunarity: 2.3, maskSource: 'card-mask', mode: 'f2MinusF1', octaves: 2, persistence: 1, scale: 2.5, seed: 33, speed: 2.2 } },
+      { type: 'LinearBlur', id: 'card-blur', props: { angle: 211, intensity: 500 } },
+      { type: 'ChromaticAberration', id: 'card-ca', props: { strength: 0.15 } },
+      { type: 'FilmGrain', id: 'card-grain', props: { strength: 0.05 } },
+    ],
+    options: {},
   },
 };
 
